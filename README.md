@@ -7,4 +7,4 @@ File(Blob) <---> DataURL(base64) <---> Image(DOM) <---> Canvas(DOM)
 
 其中 canvas 在做 data url / blob 輸出時，可以調整品質以及設定副檔名
 
-//  TODO  將品質 / 副檔名 實作為彈性動態
+**//  TODO  將品質 / 副檔名 實作為彈性動態**

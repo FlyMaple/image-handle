@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    img {
+      width: 500px;
+      margin: 20px;
+      height: auto;
+    }
+
+    canvas {
+      margin: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <form action="">
+    <input type="file" name="" id="files">
+  </form>
+
+  <script>
+    /***************************************************
+     * 
+     * File Type Convert Anything
+     * 
+     ***************************************************/
+    function fileToDataUrl(file, cb) {
+      var reader = new FileReader()
+
+      reader.onloadend = function (e) {
+        cb(e.target.result)
+      }
+
+      reader.readAsDataURL(file)
+    }
+
+    function fileToImage(file, cb) {
+      fileToDataUrl(file, function (dataUrl) {
+        dataUrlToImage(dataUrl, function (image) {
+          cb(image)
+        })
+      })
+    }
+
+    function fileToConvas(file, cb) {
+      fileToImage(file, function (image) {
+        imageToCanvas(image, function (canvas) {
+          cb(canvas)
+        })
+      })
+    }
+
+    /***************************************************
+     * 
+     * DataURL Type Convert Anything
+     * 
+     ***************************************************/
+    function dataUrlToImage(dataUrl, cb) {
+      var image = new Image()
+
+      image.onload = function () {
+        cb(image)
+      }
+
+      image.src = dataUrl
+    }
+
+    function dataUrlToCanvas(dataUrl, cb) {
+      dataUrlToImage(dataUrl, function (image) {
+        imageToCanvas(image, function (canvas) {
+          cb(canvas)
+        })
+      })
+    }
+
+    function dataUrlToFile(dataUrl, cb) {
+      dataUrlToImage(dataUrl, function (image) {
+        imageToFile(image, function (file) {
+          cb(file)
+        })
+      })
+    }
+
+
+    /***************************************************
+     * 
+     * Image Type Convert Anything
+     * 
+     ***************************************************/
+    function imageToCanvas(image, cb) {
+      var canvas = document.createElement('canvas')
+      var context = canvas.getContext('2d')
+
+      var canvasWidth = 500
+      var canvasHeight = 500 * image.height / image.width
+
+      canvas.setAttribute('width', canvasWidth)
+      canvas.setAttribute('height', canvasHeight)
+
+      context.width = image.width
+      context.height = image.height
+      context.drawImage(image, 0, 0, canvasWidth, canvasHeight)
+
+      cb(canvas)
+    }
+
+    function imageToDataUrl(image, cb) {
+      imageToCanvas(image, function (canvas) {
+        cb(canvas.toDataURL('image/jpeg', 1))
+      })
+    }
+
+    function imageToFile(image, cb) {
+      imageToCanvas(image, function (canvas) {
+        canvas.toBlob(function (blob) {
+          cb(blob)
+        }, 'image/jpeg', 1)
+      })
+    }
+
+    // File(Blob) <---> DataURL(base64) <---> Image(DOM) <---> Canvas(DOM) 
+    function run() {
+      var fileDOM = document.getElementById('files')
+      var file = fileDOM.files[0]
+
+      // fileToDataUrl(file, function (dataUrl) {
+      //   var image = new Image()
+      //   image.src = dataUrl
+
+      //   document.body.appendChild(image)
+      // })
+
+      // fileToImage(file, function (image) {
+      //   document.body.appendChild(image)
+      // })
+
+      // fileToConvas(file, function (canvas) {
+      //   document.body.appendChild(canvas)
+      // })
+
+
+
+      // fileToDataUrl(file, function (dataUrl) {
+      //   dataUrlToImage(dataUrl, function (image) {
+      //     document.body.appendChild(image)
+      //   })
+
+      //   dataUrlToCanvas(dataUrl, function (canvas) {
+      //     document.body.appendChild(canvas)
+      //   })
+
+      //   dataUrlToFile(dataUrl, function (file) {
+
+      //   })
+      // })
+
+
+      // fileToImage(file, function (image) {
+      //   imageToCanvas(image, function (canvas) {
+      //     document.body.appendChild(canvas)
+      //   })
+
+      //   imageToFile(image, function (file) {
+
+      //   })
+
+      //   imageToDataUrl(image, function (dataUrl) {
+      //     var image = new Image()
+      //     image.src = dataUrl
+
+      //     document.body.appendChild(image)
+      //   })
+      // })
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,81 @@
+<div>
+  <div class="imageToFile">
+    <form action="">
+      <div class="card imageToFile">
+        <h2>Image To File</h2>
+        <div>
+          <img src="assets/golang.png" alt="" id="img1">
+          <button id="button1">Transfrom To File</button>
+        </div>
+
+        <div>
+          <img src="assets/original.jpg" alt="" id="img2">
+          <button id="button2">Transfrom To File</button>
+        </div>
+
+        <div class="wrapper">
+        </div>
+
+        <div class="code">
+          <div></div>
+        </div>
+
+        <h3>click</h3>
+        <pre><code class="javascript">
+    {{
+    "$('.imageToFile button').on('click', (event) => {
+      event.preventDefault()
+      
+      const img = $('#img')[0];
+
+      imageToFile(img, (file) => {
+        $('.imageToFile .code div').html(
+          `${file}
+          ${
+          JSON.stringify({
+            size: file.size,
+            type: file.type
+          }, null, 2)}`
+        )
+      })
+    })"
+    }}
+            </code></pre>
+
+        <h3>source</h3>
+        <pre><code class="javascript">
+    {{
+    "//  Step: image --> canvas
+    
+    function imageToFile(image, cb) {
+      var mime = image.src.match(/^data:(.+);/)[1] || 'image/jpeg'
+    
+      imageToCanvas(image, function (canvas) {
+        canvas.toBlob(function (blob) {
+          cb(blob)
+        }, mime, 1)
+      })
+    }
+    
+    function imageToCanvas(image, cb) {
+      var canvas = document.createElement('canvas')
+      var context = canvas.getContext('2d')
+    
+      var canvasWidth = 128
+      var canvasHeight = 128 * image.height / image.width
+    
+      canvas.setAttribute('width', canvasWidth)
+      canvas.setAttribute('height', canvasHeight)
+    
+      context.width = image.width
+      context.height = image.height
+      context.drawImage(image, 0, 0, canvasWidth, canvasHeight)
+    
+      cb(canvas)
+    }"
+    }}
+            </code></pre>
+      </div>
+    </form>
+  </div>
+</div>

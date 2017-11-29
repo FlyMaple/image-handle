@@ -1,0 +1,51 @@
+<div>
+  <div class="fileToDataUrl">
+    <form action="">
+      <div class="card fileToDataUrl">
+        <h2>File To Data Url</h2>
+        <input type="file" name="">
+        <button>Transfrom To Data Url</button>
+
+        <div class="wrapper">
+        </div>
+
+        <div class="code">
+          <div></div>
+        </div>
+
+        <h3>click</h3>
+        <pre><code class="javascript">
+    {{
+    "$('.fileToDataUrl button').on('click', (event) => {
+      event.preventDefault()
+
+      const fileDOM = $('.fileToDataUrl [type=file]')[0];
+      const file = fileDOM.files[0];
+
+      fileToDataUrl(file, (dataurl) => {
+        $('.fileToImage .code div').text(dataurl)
+      })
+    })"
+    }}
+        </code></pre>
+
+        <h3>source</h3>
+        <pre><code class="javascript">
+    {{
+    "//  Step: file --> data url
+    
+    function fileToDataUrl(file, cb) {
+      var reader = new FileReader()
+
+      reader.onloadend = function (e) {
+        cb(e.target.result)
+      }
+
+      reader.readAsDataURL(file)
+    }"
+    }}
+        </code></pre>
+      </div>
+    </form>
+  </div>
+</div>

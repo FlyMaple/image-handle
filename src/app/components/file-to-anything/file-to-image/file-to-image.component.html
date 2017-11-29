@@ -1,0 +1,71 @@
+<div>
+  <div class="fileToImage">
+    <form action="">
+
+      <div class="card fileToImage">
+        <h2>File To Image</h2>
+        <input type="file" name="">
+        <button>Transfrom To Image</button>
+
+        <div class="wrapper">
+
+        </div>
+
+        <div class="code">
+          <div></div>
+        </div>
+
+        <h3>click</h3>
+        <pre><code class="javascript">
+    {{
+    "$('.fileToImage button').on('click', (event) => {
+      event.preventDefault()
+
+      const fileDOM = $('.fileToImage [type=file]')[0];
+      const file = fileDOM.files[0];
+
+      fileToImage(file, (image) => {
+        $('.fileToImage .wrapper').append(image)
+      })
+    })"
+    }}
+        </code></pre>
+
+        <h3>source</h3>
+        <pre><code class="javascript">
+    {{
+    "//  Step: file --> data url --> image
+    
+    function fileToImage(file, cb) {
+      fileToDataUrl(file, function (dataUrl) {
+        dataUrlToImage(dataUrl, function (image) {
+          return image
+        })
+      })
+    }
+
+    function fileToDataUrl(file, cb) {
+      var reader = new FileReader()
+
+      reader.onloadend = function (e) {
+        cb(e.target.result)
+      }
+
+      reader.readAsDataURL(file)
+    }
+
+    function dataUrlToImage(dataUrl, cb) {
+      var image = new Image()
+
+      image.onload = function () {
+        cb(image)
+      }
+
+      image.src = dataUrl
+    }"
+    }}
+        </code></pre>
+      </div>
+    </form>
+  </div>
+</div>

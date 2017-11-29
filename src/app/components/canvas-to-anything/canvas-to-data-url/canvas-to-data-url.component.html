@@ -1,0 +1,51 @@
+<div>
+  <div class="canvasToDataUrl">
+    <form action="">
+
+      <div class="card canvasToDataUrl">
+        <h2>Canvas To Data Url</h2>
+
+        <div class="canvas-wrapper"></div>
+        <button>Transfrom To Data Url</button>
+
+        <div class="wrapper">
+
+        </div>
+
+        <div class="code">
+          <div></div>
+        </div>
+
+        <h3>click</h3>
+        <pre><code class="javascript">
+    {{
+    "$('.canvasToDataUrl button').on('click', (event) => {
+      event.preventDefault()
+
+      const canvas = $('.canvas-wrapper canvas')[0]
+
+      canvasToDataUrl(canvas, 'image/png', (dataUrl) => {
+        dataUrlToImage(dataUrl, image => {
+          $('.canvasToDataUrl .wrapper').append(image)
+        })
+
+        $('.canvasToDataUrl .code div').append(dataUrl)
+      })
+    })"
+    }}
+        </code></pre>
+
+        <h3>source</h3>
+        <pre><code class="javascript">
+    {{
+    "//  Step: canvas --> data url
+    
+    canvasToDataUrl(canvas: HTMLCanvasElement, mime: string, cb: Function): void {
+      cb(canvas.toDataURL(mime, 1))
+    }"
+    }}
+        </code></pre>
+      </div>
+    </form>
+  </div>
+</div>

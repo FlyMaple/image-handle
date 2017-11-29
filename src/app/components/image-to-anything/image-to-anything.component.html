@@ -1,0 +1,18 @@
+<ul class="nav nav-pills">
+  <li role="presentation" [ngClass]="{active: type === 'imageToDataUrl'}">
+      <a href="" (click)="handleTypeChange($event, 'imageToDataUrl')">Image To Data Url</a>
+  </li>
+  <li role="presentation" [ngClass]="{active: type === 'imageToCanvas'}">
+      <a href="" (click)="handleTypeChange($event, 'imageToCanvas')">Image To Canvas</a>
+  </li>
+  <li role="presentation" [ngClass]="{active: type === 'imageToFile'}">
+      <a href="" (click)="handleTypeChange($event, 'imageToFile')">Image To File</a>
+  </li>
+</ul>
+
+<div [ngSwitch]="type">
+  <app-image-to-data-url *ngSwitchCase="'imageToDataUrl'"></app-image-to-data-url>
+  <app-image-to-canvas *ngSwitchCase="'imageToCanvas'"></app-image-to-canvas>
+  <app-image-to-file *ngSwitchCase="'imageToFile'"></app-image-to-file>
+  <app-image-to-data-url *ngSwitchDefault></app-image-to-data-url>
+</div>

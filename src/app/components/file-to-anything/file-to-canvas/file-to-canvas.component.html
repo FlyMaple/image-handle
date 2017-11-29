@@ -1,0 +1,98 @@
+<div>
+  <div class="fileToCanvas">
+    <form action="">
+      <div class="card fileToCanvas">
+        <h2>File To Canvas</h2>
+        <input type="file" name="">
+        <button>Transfrom To Canvas</button>
+
+        <div class="wrapper">
+
+        </div>
+
+        <div class="code">
+          <div></div>
+        </div>
+
+        <h3>click</h3>
+        <pre><code class="javascript">
+    {{
+    "$('.fileToCanvas button').on('click', (event) => {
+      event.preventDefault()
+
+      const fileDOM = $('.fileToCanvas [type=file]')[0];
+      const file = fileDOM.files[0];
+
+
+      fileToCanvas(file, (canvas) => {
+        $('.fileToCanvas .wrapper').append(canvas)
+      })
+    })"
+    }}
+          </code></pre>
+
+        <h3>source</h3>
+        <pre><code class="javascript">
+    {{
+    "//  Step: file --> data url --> image --> canvas
+
+    function fileToCanvas(file, cb) {
+      fileToImage(file, function (image) {
+        imageToCanvas(image, function (canvas) {
+          cb(canvas)
+        })
+      })
+    }
+
+    function fileToImage(file, cb) {
+      fileToDataUrl(file, function (dataUrl) {
+        dataUrlToImage(dataUrl, function (image) {
+          cb(image)
+        })
+      })
+    }
+
+    function fileToDataUrl(file, cb) {
+      var reader = new FileReader()
+
+      reader.onloadend = function (e) {
+        cb(e.target.result)
+      }
+
+      reader.readAsDataURL(file)
+    }
+
+    function dataUrlToImage(dataUrl, cb) {
+      var image = new Image()
+
+      image.onload = function () {
+        cb(image)
+      }
+
+      image.src = dataUrl
+    }
+
+    function imageToCanvas(image, cb) {
+      var canvas = document.createElement('canvas')
+      var context = canvas.getContext('2d')
+
+      var canvasWidth = 128
+      var canvasHeight = 128 * image.height / image.width
+
+      canvas.setAttribute('width', canvasWidth)
+      canvas.setAttribute('height', canvasHeight)
+
+      context.width = image.width
+      context.height = image.height
+      context.drawImage(image, 0, 0, canvasWidth, canvasHeight)
+
+      cb(canvas)
+    }"
+    }}
+          </code></pre>
+      </div>
+
+
+    </form>
+  </div>
+</div>

@@ -1,0 +1,65 @@
+<div>
+    <div class="imageToCanvas">
+      <form action="">
+        <div class="card imageToCanvas">
+          <h2>Image To Canvas</h2>
+          <div>
+            <img src="assets/golang.png" alt="" id="img1">
+            <button id="button1">Transfrom To Canvas</button>
+          </div>
+  
+          <div>
+            <img src="assets/下載.jpg" alt="" id="img2">
+            <button id="button2">Transfrom To Canvas</button>
+          </div>
+  
+          <div class="wrapper">
+          </div>
+  
+          <div class="code">
+            <div></div>
+          </div>
+  
+          <h3>click</h3>
+          <pre><code class="javascript">
+    {{
+    "$('.imageToCanvas button').on('click', (event) => {
+      event.preventDefault()
+      
+      const img = $('#img')[0];
+
+      imageToCanvas(img, (canvas) => {
+        $('.fileToImage .wrapper').append(canvas)
+      })
+    })"
+    }}
+            </code></pre>
+  
+          <h3>source</h3>
+          <pre><code class="javascript">
+    {{
+    "//  Step: image --> canvas
+    
+    function imageToCanvas(image, cb) {
+      var canvas = document.createElement('canvas')
+      var context = canvas.getContext('2d')
+    
+      var canvasWidth = 128
+      var canvasHeight = 128 * image.height / image.width
+    
+      canvas.setAttribute('width', canvasWidth)
+      canvas.setAttribute('height', canvasHeight)
+    
+      context.width = image.width
+      context.height = image.height
+      context.drawImage(image, 0, 0, canvasWidth, canvasHeight)
+    
+      cb(canvas)
+    }
+    "
+    }}
+            </code></pre>
+        </div>
+      </form>
+    </div>
+  </div>

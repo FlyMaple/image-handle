@@ -1,0 +1,56 @@
+<div>
+  <div class="dataUrlToImage">
+    <form action="">
+
+      <div class="card dataUrlToImage">
+        <h2>Data Url To Image</h2>
+        <div>
+          <input type="text" value="" id="base64_1">
+        </div>
+        <button id="btnBase64_1">Transfrom To Image</button>
+        <div>
+          <input type="text" value="" id="base64_2">
+        </div>
+        <button id="btnBase64_2">Transfrom To Image</button>
+        <div class="wrapper">
+
+        </div>
+
+        <div class="code">
+          <div></div>
+        </div>
+
+        <h3>click</h3>
+        <pre><code class="javascript">
+    {{
+    "$('button').on('click', (event) => {
+      event.preventDefault()
+
+      dataUrlToImage(base64, image => {
+        $('.dataUrlToImage .wrapper').append(image)
+      })
+    })"
+    }}
+          </code></pre>
+
+        <h3>source</h3>
+        <pre><code class="javascript">
+    {{
+    "//  Step: dataUrl --> image
+    
+    function dataUrlToImage(dataUrl, cb) {
+      var image = new Image()
+    
+      image.onload = function () {
+        cb(image)
+      }
+    
+      image.src = dataUrl
+    }
+    "
+    }}
+          </code></pre>
+      </div>
+    </form>
+  </div>
+</div>

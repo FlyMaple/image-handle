@@ -1,0 +1,81 @@
+<div>
+  <div class="dataUrlToCanvas">
+    <form action="">
+
+      <div class="card dataUrlToCanvas">
+        <h2>Data Url To Canvas</h2>
+        <div>
+          <input type="text" value="" id="base64_1">
+        </div>
+        <button id="btnBase64_1">Transfrom To Canvas</button>
+        <div>
+          <input type="text" value="" id="base64_2">
+        </div>
+        <button id="btnBase64_2">Transfrom To Canvas</button>
+        <div class="wrapper">
+
+        </div>
+
+        <div class="code">
+          <div></div>
+        </div>
+
+        <h3>click</h3>
+        <pre><code class="javascript">
+    {{
+    "$('button').on('click', (event) => {
+      event.preventDefault()
+
+      dataUrlToCanvas(base64, canvas => {
+        $('.dataUrlToCanvas .wrapper').append(canvas)
+      })
+    })"
+    }}
+          </code></pre>
+
+        <h3>source</h3>
+        <pre><code class="javascript">
+    {{
+    "//  Step: dataUrl --> image --> canvas
+    
+    function dataUrlToCanvas(dataUrl, cb) {
+      dataUrlToImage(dataUrl, function (image) {
+        imageToCanvas(image, function (canvas) {
+          cb(canvas)
+        })
+      })
+    }
+
+    function dataUrlToImage(dataUrl, cb) {
+      var image = new Image()
+    
+      image.onload = function () {
+        cb(image)
+      }
+    
+      image.src = dataUrl
+    }
+
+    function imageToCanvas(image, cb) {
+      var canvas = document.createElement('canvas')
+      var context = canvas.getContext('2d')
+    
+      var canvasWidth = 128
+      var canvasHeight = 128 * image.height / image.width
+    
+      canvas.setAttribute('width', canvasWidth)
+      canvas.setAttribute('height', canvasHeight)
+    
+      context.width = image.width
+      context.height = image.height
+      context.drawImage(image, 0, 0, canvasWidth, canvasHeight)
+    
+      cb(canvas)
+    }
+    "
+    }}
+          </code></pre>
+      </div>
+    </form>
+  </div>
+</div>

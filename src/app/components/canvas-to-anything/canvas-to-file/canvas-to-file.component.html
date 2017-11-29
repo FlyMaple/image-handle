@@ -1,0 +1,59 @@
+<div>
+  <div class="canvasToFile">
+    <form action="">
+
+      <div class="card canvasToFile">
+        <h2>Canvas To File</h2>
+
+        <div class="canvas-wrapper"></div>
+        <button>Transfrom To File</button>
+
+        <div class="wrapper">
+
+        </div>
+
+        <div class="code">
+          <div></div>
+        </div>
+
+        <h3>click</h3>
+        <pre><code class="javascript">
+    {{
+    "$('.canvasToFile button').on('click', (event) => {
+      event.preventDefault()
+
+      const canvas = $('.canvas-wrapper canvas')[0]
+
+      canvasToFile(canvas, 'image/png', (file) => {
+        fileToImage(file, image => {
+          $('.canvasToFile .wrapper').append(image)
+        })
+
+        $('.canvasToFile .code div').html(
+          `${file}
+          ${JSON.stringify({
+            size: file.size,
+            type: file.type
+          }, null, 2)}`
+        )
+      })
+    })"
+    }}
+        </code></pre>
+
+        <h3>source</h3>
+        <pre><code class="javascript">
+    {{
+    "//  Step: canvas --> file
+    
+    canvasToFile(canvas: HTMLCanvasElement, mime: string, cb: Function): void {
+      canvas.toBlob((blob) => {
+        cb(blob)
+      }, mime, 1)
+    }"
+    }}
+        </code></pre>
+      </div>
+    </form>
+  </div>
+</div>

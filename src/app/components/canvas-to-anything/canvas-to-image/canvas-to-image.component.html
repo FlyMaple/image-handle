@@ -1,0 +1,51 @@
+<div>
+  <div class="canvasToImage">
+    <form action="">
+
+      <div class="card canvasToImage">
+        <h2>Canvas To Image</h2>
+
+        <div class="canvas-wrapper"></div>
+        <button>Transfrom To Image</button>
+
+        <div class="wrapper">
+
+        </div>
+
+        <div class="code">
+          <div></div>
+        </div>
+
+        <h3>click</h3>
+        <pre><code class="javascript">
+    {{
+    "$('.canvasToImage button').on('click', (event) => {
+      event.preventDefault()
+
+      const canvas = $('.canvas-wrapper canvas')[0]
+
+      canvasToImage(canvas, 'image/png', (image) => {
+        $('.canvasToImage .wrapper').append(image)
+      })
+    })"
+    }}
+        </code></pre>
+
+        <h3>source</h3>
+        <pre><code class="javascript">
+    {{
+    "//  Step: canvas --> data url --> iamge
+    
+    canvasToImage(canvas: HTMLCanvasElement, mime: string, cb: Function): void {
+      const dataUrl = canvas.toDataURL(mime, 1)
+  
+      this.dataUrlToImage(dataUrl, image => {
+        cb(image)
+      })
+    }"
+    }}
+        </code></pre>
+      </div>
+    </form>
+  </div>
+</div>

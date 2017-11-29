@@ -1,27 +1,10 @@
-# ImageTransform
+# image-handle
+紀錄一些圖片相關的技術資訊
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.0.
+## [圖片型態轉換](%E5%9C%96%E7%89%87%E5%9E%8B%E6%85%8B%E8%BD%89%E6%8F%9B.html)
 
-## Development server
+File(Blob) <---> DataURL(base64) <---> Image(DOM) <---> Canvas(DOM) 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+其中 canvas 在做 data url / blob 輸出時，可以調整品質以及設定副檔名
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+**//  TODO  將品質 / 副檔名 實作為彈性動態**
